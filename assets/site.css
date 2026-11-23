@@ -1,0 +1,129 @@
+/* anderslofstrom.com - placeholder recreated from the Adobe Portfolio theme (2023).
+   Colours, sizes and spacing are taken from the saved Portfolio stylesheets. */
+
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("fonts/source-sans-3-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-style: italic; font-weight: 500; font-display: swap;
+  src: url("fonts/source-sans-3-latin-500-italic.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); }
+
+:root {
+  --navy: #012B55;      /* logo, headings, active menu */
+  --slate: #41576D;     /* menu items */
+  --muted: #597188;     /* masthead text, footer */
+  --gap: 8px;
+  --row: 260;          /* target row height in the galleries (px) */
+}
+@media (max-width: 1100px) { :root { --row: 170; } }
+
+* { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; background: #fff; color: var(--navy);
+  font-family: "Source Sans 3", "Helvetica Neue", Arial, sans-serif; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* Layout: sidebar 20 % + main 75 %, inside 4 % side margins, max 1800 px */
+.site { max-width: 1800px; margin: 0 auto; padding: 0 4%; display: flex; align-items: flex-start; }
+.sidebar { width: 20%; margin-right: 5%; position: sticky; top: 0; }
+main { width: 75%; }
+
+.site-header { padding: 50px 0 40px; }
+.logo img { width: 178px; max-width: 100%; height: auto; }
+.hamburger { display: none; }
+
+.site-nav ul { list-style: none; margin: 0; padding: 0 0 15px; }
+.site-nav li { padding-bottom: 10px; }
+.site-nav .gallery-title { padding-bottom: 15px; }
+.site-nav .gallery-title a, .site-nav .page-title a { color: var(--navy); font-size: 17px; line-height: 20px; font-weight: 600; }
+.site-nav .project-title a { color: var(--slate); font-size: 16px; line-height: 18px; font-weight: 400; }
+.site-nav .project-title a:hover, .site-nav .project-title a.active { color: var(--navy); }
+.site-nav .project-title a.active { font-weight: 600; }
+.site-nav .page-title { padding-bottom: 15px; }
+
+/* Start page masthead */
+.masthead { padding: 110px 12% 90px; text-align: center; }
+.masthead h1 { margin: 0 0 10px; font-size: 28px; line-height: 36px; font-weight: 500; color: var(--navy); }
+.masthead h1 a { border-bottom: 1px solid currentColor; }
+.masthead p { margin: 20px 0 0; font-size: 18px; line-height: 28px; font-weight: 500; color: var(--muted); }
+
+/* Project covers: two per row, 16:9, navy overlay with date + title on hover */
+.project-covers { display: flex; flex-wrap: wrap; justify-content: space-between; }
+.project-cover { position: relative; display: block; width: 49.75%; margin-top: 1%; aspect-ratio: 16 / 9; overflow: hidden; }
+.project-cover img { width: 100%; height: 100%; object-fit: cover; }
+.project-cover::after { content: ""; position: absolute; inset: 0; background: var(--navy); opacity: 0; transition: opacity .2s ease; }
+.project-cover .details { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; color: #fff; opacity: 0; transition: opacity .15s ease; padding: 5%; text-align: center; }
+.project-cover:hover::after, .project-cover:focus-visible::after { opacity: .85; }
+.project-cover:hover .details, .project-cover:focus-visible .details { opacity: 1; }
+.project-cover .date { font-size: 16px; line-height: 18px; font-style: italic; font-weight: 500; padding-bottom: 5px; }
+.project-cover .title { font-size: 26px; line-height: 33px; font-weight: 600; }
+@media (hover: none) {
+  /* phones and tablets have no hover: show the titles all the time */
+  .project-cover::after { opacity: .35; }
+  .project-cover .details { opacity: 1; }
+}
+
+/* Page header (galleries, Priser, Kontakt) */
+.page-header { max-width: 800px; margin: 0 auto; padding: 100px 5% 50px; text-align: center; }
+.page-header h1 { margin: 0; padding: 8px 0 20px; font-size: 30px; line-height: 34px; font-weight: 600; color: var(--navy); }
+
+/* Justified image grid (same technique as Portfolio: flex-grow = width/height x 260) */
+.grid { display: flex; flex-wrap: wrap; margin: 0 calc(var(--gap) / -2); }
+.grid-item { position: relative; display: block; box-sizing: content-box; width: calc(var(--r) * var(--row) * 1px);
+  border: 0 solid transparent; border-width: 0 calc(var(--gap) / 2) var(--gap); cursor: zoom-in; }
+.grid-item img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.grid-item .filler { display: block; background: rgba(0, 0, 0, .03); }
+.grid-spacer { flex-grow: 1000000000; }
+
+/* Text pages */
+.text-module { max-width: 800px; margin: 0 auto; padding: 14px 5%; text-align: center; font-size: 16px; line-height: 24px; color: var(--navy); }
+.text-module p { margin: 0 0 12px; }
+.text-module a { border-bottom: 1px solid currentColor; }
+.text-module a.button { display: inline-block; margin-top: 8px; padding: 12px 22px; border: 1px solid var(--navy); border-radius: 3px; font-weight: 600; }
+.text-module a.button:hover { background: var(--navy); color: #fff; }
+
+.site-footer { clear: both; padding: 60px 5%; text-align: center; font-size: 16px; line-height: 18px; color: var(--muted); }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(255, 255, 255, .97); display: none; align-items: center; justify-content: center; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: calc(100vw - 140px); max-height: calc(100vh - 80px); width: auto; height: auto; }
+.lightbox button { position: absolute; background: none; border: 0; color: var(--navy); font: inherit; cursor: pointer; padding: 16px; line-height: 1; }
+.lightbox .lb-close { top: 10px; right: 14px; font-size: 34px; }
+.lightbox .lb-prev, .lightbox .lb-next { top: 50%; transform: translateY(-50%); font-size: 44px; }
+.lightbox .lb-prev { left: 10px; }
+.lightbox .lb-next { right: 10px; }
+.lightbox .lb-count { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; font-size: 14px; color: var(--muted); }
+
+/* Tablet and phone: logo bar on top, hamburger menu */
+@media (max-width: 768px) {
+  .site { display: block; padding: 0; }
+  .sidebar { width: auto; margin: 0; position: static; }
+  main { width: 100%; }
+  .site-header { display: flex; align-items: center; justify-content: space-between; padding: 30px 5%; }
+  .logo img { width: auto; max-height: 60px; }
+  .hamburger { display: block; width: 44px; height: 44px; background: none; border: 0; padding: 10px 8px; cursor: pointer; }
+  .hamburger i { display: block; height: 2px; margin: 5px 0; background: var(--navy); }
+  .site-nav { display: none; }
+  body.nav-open { overflow: hidden; }
+  body.nav-open .site-nav { display: flex; flex-direction: column; justify-content: center; position: fixed; inset: 0; z-index: 50;
+    background: #fff; text-align: center; padding: 50px 5%; }
+  body.nav-open .site-nav a { font-size: 22px; line-height: 32px; }
+  body.nav-open .site-nav li, body.nav-open .site-nav .page-title { padding: 0 0 22px; }
+  body.nav-open .hamburger { position: fixed; top: 30px; right: 5%; z-index: 60; }
+  .masthead { padding: 38px 8% 33px; }
+  .masthead h1 { font-size: 18px; line-height: 24px; }
+  .masthead p { font-size: 14px; line-height: 20px; margin-top: 13px; }
+  .project-cover { width: 100%; margin-top: 2%; }
+  .project-cover .title { font-size: 19px; line-height: 24px; }
+  .page-header { padding: 34px 5% 21px; }
+  .page-header h1 { font-size: 19px; line-height: 22px; padding-bottom: 13px; }
+  .grid { margin: 0; }
+  .site-footer { padding: 25px 5%; font-size: 14px; line-height: 20px; }
+  .lightbox img { max-width: 100vw; max-height: calc(100vh - 120px); }
+  .lightbox .lb-prev, .lightbox .lb-next { top: auto; bottom: 4px; transform: none; }
+}
